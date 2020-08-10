@@ -1,0 +1,1 @@
+This is a repo to follow the course: Building a Website with Node.js and Express.js from Lynda.com.
