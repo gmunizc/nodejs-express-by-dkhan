@@ -24,7 +24,22 @@ app.use(
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './views'));
 
+// I can store local variables that are present throughout the whole express lifecycle here:
+app.locals.siteName = 'ROUX Meetups';
+
 app.use(express.static(path.join(__dirname, './static')));
+
+// Custom middleware to save local variables to be used in template
+app.use(async (req, res, next) => {
+  try {
+    const names = await speakersService.getNames();
+    res.locals.speakerNames = names;
+    console.log(res.locals);
+  } catch (error) {
+    next(error);
+  }
+  next();
+});
 
 app.use(
   '/',
