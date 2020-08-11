@@ -61,9 +61,10 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  res.locals.message = err.message;
   const status = err.status || 500;
+  console.error(err);
   res.locals.status = status;
+  res.locals.message = err.message;
   res.status(status);
   res.render('error');
 });
