@@ -7,7 +7,8 @@ module.exports = (params) => {
 
   router.get('/', async (req, res) => {
     const speakers = await speakersService.getList();
-    res.render('layout', { pageTitle: 'Speakers', template: 'speakers', speakers });
+    const artWork = await speakersService.getAllArtwork();
+    res.render('layout', { pageTitle: 'Speakers', template: 'speakers', speakers, artWork });
   });
 
   router.get('/:shortname', async (req, res) => {
