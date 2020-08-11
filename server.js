@@ -34,7 +34,6 @@ app.use(async (req, res, next) => {
   try {
     const names = await speakersService.getNames();
     res.locals.speakerNames = names;
-    console.log(res.locals);
   } catch (error) {
     next(error);
   }
