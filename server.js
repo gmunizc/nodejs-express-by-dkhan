@@ -29,15 +29,22 @@ app.locals.siteName = 'ROUX Meetups';
 
 app.use(express.static(path.join(__dirname, './static')));
 
+// When an error occur, if we don't pass it to next(), it will bring down the entire application
+app.get('/throw', (req, res, next) => {
+  setTimeout(() => {
+    next(new Error('Something went wrong...'));
+  }, 500);
+});
+
 // Custom middleware to save local variables to be used in template
 app.use(async (req, res, next) => {
   try {
     const names = await speakersService.getNames();
     res.locals.speakerNames = names;
+    next();
   } catch (error) {
     next(error);
   }
-  next();
 });
 
 app.use(
