@@ -12,7 +12,12 @@ module.exports = (params) => {
     try {
       const topSpeakers = await speakersService.getList();
       const artWork = await speakersService.getAllArtwork();
-      res.render('layout', { pageTitle: 'Welcome', template: 'index', topSpeakers, artWork });
+      return res.render('layout', {
+        pageTitle: 'Welcome',
+        template: 'index',
+        topSpeakers,
+        artWork,
+      });
     } catch (error) {
       next(error);
     }
